@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-
 root = tk.Tk()
 
 root.title("Calculator (built in python)")
@@ -25,11 +24,20 @@ operation = tk.Label(
 )
 
 def button_pressed(value):
-    current = display_text.get()
-    if current == "0":
-        display_text.set(value)
+    if value == "C":
+        display_text.set(0)
+    elif value == "CE":
+        current = display_text.get()
+        if len(current) > 1:
+            display_text.set(current[:-1])
+        else:
+            display_text.set(0)
     else:
-        display_text.set(current + value)
+        current = display_text.get()
+        if current == "0":
+            display_text.set(value)
+        else:
+            display_text.set(current + value)
 
 
 operation.grid(row=0, column=0, columnspan=5, sticky="nsew", padx=5, pady=5)
